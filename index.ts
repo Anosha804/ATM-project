@@ -1,10 +1,11 @@
 #! /usr/bin/env node
 
 import inquirer from "inquirer";
+import chalk from "chalk";
 
 let myBalance = 20000;
 let myPin = 7272;
-console.log(`Your Current Balance is ${myBalance}`);
+console.log(chalk.grey.bold(`Your Current Balance is ${myBalance}`));
 
 let pinAnswer =await inquirer.prompt([
     {
@@ -17,7 +18,7 @@ let pinAnswer =await inquirer.prompt([
 
 
 if (pinAnswer.pin === myPin){
-    console.log("Your Pin Code is Correct!!!");
+    console.log(chalk.green.bold("Your Pin Code is Correct!!!"));
 
     let operationAns = await inquirer.prompt([
         {
@@ -38,23 +39,23 @@ if (pinAnswer.pin === myPin){
         ]);
 
         if (amountAns.ammount > myBalance){
-            console.log("Insufficient Balance");
+            console.log(chalk.red.bold("Insufficient Balance"));
         }
 
         else {
             myBalance -= amountAns.ammount;
-            console.log("Withdraw Successfully");
-            console.log(`Your remaining balance is ${myBalance}`);
+            console.log(chalk.blue.bold("Withdraw Successfully"));
+            console.log(chalk.blue.bold(`Your remaining balance is ${myBalance}`));
          };
 
          }
 
          else if (operationAns.operator === "Check Balance"){
-            console.log(`Your Account Balance is ${myBalance}`);
+            console.log(chalk.green.bold(`Your Account Balance is ${myBalance}`));
         }  
 }
     else {
-        console.log("Incorrect pin code");
+        console.log(chalk.red("Incorrect pin code"));
 }
 
     
